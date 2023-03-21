@@ -4,18 +4,34 @@ internal class program
 {
     static void Main(string[] args)
     {
-        Penjumlahan.JumlahTigaAngka<double>(13.0, 0.2, 3.0);
+        SimpleDataBase<double> data = new SimpleDataBase<double>();
+        data.AddNewData(13.0);
+        data.AddNewData(2.0);
+        data.AddNewData(5.0);
+        data.PrintAllData();
     }
 }
-public class Penjumlahan
+public class SimpleDataBase<T>
 {
-    public static void JumlahTigaAngka<T>(T input1, T input2, T input3) {
-        dynamic i1, i2, i3;
-        i1 = input1;
-        i2 = input2;
-        i3 = input3;
+    private List<T> storedData;
+    private List<DateTime> inputDates;
 
-        Console.WriteLine(i1+i2+i3);
+    public SimpleDataBase() {
+        storedData= new List<T>();
+        inputDates= new List<DateTime>();
+    }
 
-    } 
+    public void AddNewData(T input)
+    {
+        storedData.Add(input);
+        inputDates.Add(DateTime.Now);
+    }
+
+    public void PrintAllData()
+    {
+        for (int i = 1; i <= storedData.Count; i++)
+        {
+            Console.WriteLine("Data " + i + " berisi: " + storedData[i-1] + ", yang disimpan pada waktu UTC: " + inputDates[i-1]);
+        }
+    }
 }
